@@ -1,45 +1,47 @@
-interface J {
-    void methodJ();
-}
-interface I extends J {
-    void methodI();
-}
 abstract class A {
-    abstract void methodA();
+   int a;
+
+   A(int a) {
+    this.a = a;
+  }
+
+  public abstract void Display();
 }
-class B extends A {
-    @Override
-    void methodA() {
-        System.out.println("Method A implementation in class B");
-    }
 
-    void methodB() {
-        System.out.println("Method B in class B");
-    }
+interface I {
+  int i = 10;
+
+  void Show();
 }
-class C extends B implements I {
-    @Override
-    public void methodJ() {
-        System.out.println("Method J implementation in class C");
-    }
 
-    @Override
-    public void methodI() {
-        System.out.println("Method I implementation in class C");
-    }
+interface J extends I {
+  int j = 20;
 
-    void methodC() {
-        System.out.println("Method C in class C");
-    }
+  @Override
+  void Show();
+}
+
+class B extends A implements J {
+   B(int a) {
+    super(a);
+  }
+
+  @Override
+  public void Display() {
+    System.out.println("a in A: " + a);
+  }
+
+  @Override
+  public void Show() {
+    System.out.println("i in I: " + i);
+    System.out.println("j in J: " + j);
+  }
 }
 
 public class ThrowDemo {
-    public static void main(String[] args) {
-        C objC = new C();
-        objC.methodJ();
-        objC.methodI();
-        objC.methodA();
-        objC.methodB();
-        objC.methodC();
-    }
+  public static void main(String[] args) {
+    B b = new B(5);
+    b.Display();
+    b.Show();
+  }
 }
